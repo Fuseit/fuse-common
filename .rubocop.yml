@@ -1,0 +1,15 @@
+inherit_gem:
+  fuse-dev-tools: lib/fuse_dev_tools/templates/.rubocop.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    - vendor/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - fuse-common.gemspec
+    - spec/fuse_common/airbrake_config_spec.rb
