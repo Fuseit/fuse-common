@@ -8,6 +8,8 @@ inherit_mode:
 AllCops:
   Exclude:
     - vendor/**/*
+    # 3rd-party code
+    - lib/fuse_common/airbrake_libraries.rb
 
 Metrics/BlockLength:
   Exclude:

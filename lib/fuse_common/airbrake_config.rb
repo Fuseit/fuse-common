@@ -1,4 +1,4 @@
-require 'airbrake'
+require 'fuse_common/airbrake_libraries'
 
 module FuseCommon
   class AirbrakeConfig
@@ -10,6 +10,8 @@ module FuseCommon
     end
 
     def apply
+      require_airbrake
+
       configure_airbrake do |config|
         config.environment         = setting(:stack_name) || rails_env
         config.ignore_environments = ignored_environments
@@ -32,6 +34,10 @@ module FuseCommon
       def apply_project_settings config
         config.project_id  = setting(:airbrake_project_id)  || fetch_defaults!(:airbrake_project_id)
         config.project_key = setting(:airbrake_project_key) || fetch_defaults!(:airbrake_project_key)
+      end
+
+      def require_airbrake
+        AirbrakeLibraries.load
       end
 
       def configure_airbrake &block
