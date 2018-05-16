@@ -2,30 +2,32 @@ require 'fuse_common/airbrake_config'
 
 RSpec.describe FuseCommon::AirbrakeConfig do
   let(:instance) { described_class.new env }
+  let(:figaro) { instance_double 'Figaro', env: env }
 
   describe '#apply' do
-    subject { instance.apply }
+    subject(:apply) { instance.apply }
 
     context 'when ENV is empty' do
       let :env do
-        double 'Figaro',
+        class_double 'Figaro::ENV',
           rails_env: nil,
           stack_name: nil,
           airbrake_project_id: nil,
           airbrake_project_key: nil
       end
 
-      it { expect { subject }.not_to raise_error }
+      it { expect { apply }.not_to raise_error }
 
       it 'runs Airbrake configuration' do
-        expect(Airbrake).to receive(:configure)
-        subject
+        allow(Airbrake).to receive(:configure)
+        apply
+        expect(Airbrake).to have_received(:configure)
       end
     end
 
     context 'when stubbed configuration' do
       let :env do
-        double 'Figaro',
+        class_double 'Figaro::ENV',
           rails_env: nil,
           stack_name: nil,
           airbrake_project_id: nil,
@@ -33,7 +35,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
       end
 
       let :config do
-        double 'AirbrakeConfig',
+        instance_double 'AirbrakeConfig',
           'environment=': nil,
           'ignore_environments=': nil,
           'project_id=': nil,
@@ -46,36 +48,37 @@ RSpec.describe FuseCommon::AirbrakeConfig do
       end
 
       context 'when run with block' do
-        subject { instance.apply(&:foo) }
+        subject(:apply_with_block) { instance.apply(&:foo) }
 
         it 'yields provided block' do
-          expect(config).to receive(:foo).once
-          subject
+          allow(config).to receive(:foo)
+          apply_with_block
+          expect(config).to have_received(:foo).once
         end
       end
 
       context 'when provided not ignored environment' do
         let :env do
-          double 'Figaro',
+          class_double 'Figaro::ENV',
             rails_env: 'production',
             stack_name: nil,
             airbrake_project_id: nil,
             airbrake_project_key: nil
         end
 
-        it { expect { subject }.to raise_error FuseCommon::AirbrakeConfig::RequiredKeyMissed }
+        it { expect { apply }.to raise_error FuseCommon::AirbrakeConfig::RequiredKeyMissed }
       end
 
       context 'when provided ignored environment by default' do
         let :env do
-          double 'Figaro',
+          class_double 'Figaro::ENV',
             rails_env: 'development',
             stack_name: nil,
             airbrake_project_id: nil,
             airbrake_project_key: nil
         end
 
-        it { expect { subject }.not_to raise_error }
+        it { expect { apply }.not_to raise_error }
       end
 
       context 'when provided ignored environments through overrides' do
@@ -87,14 +90,14 @@ RSpec.describe FuseCommon::AirbrakeConfig do
 
         context 'when ENV are in ignored environments' do
           let :env do
-            double 'Figaro',
+            class_double 'Figaro::ENV',
               rails_env: 'foo',
               stack_name: nil,
               airbrake_project_id: nil,
               airbrake_project_key: nil
           end
 
-          it { expect { subject }.not_to raise_error }
+          it { expect { apply }.not_to raise_error }
         end
       end
     end
