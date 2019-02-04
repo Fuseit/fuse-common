@@ -12,6 +12,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
         class_double 'Figaro::ENV',
           rails_env: nil,
           stack_name: nil,
+          airbrake_environment_name: nil,
           airbrake_project_id: nil,
           airbrake_project_key: nil
       end
@@ -30,6 +31,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
         class_double 'Figaro::ENV',
           rails_env: nil,
           stack_name: nil,
+          airbrake_environment_name: nil,
           airbrake_project_id: nil,
           airbrake_project_key: nil
       end
@@ -44,7 +46,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
       end
 
       before do
-        allow(Airbrake).to receive(:configure) { |&block| block.call config }
+        allow(Airbrake).to receive(:configure).and_yield(config)
       end
 
       context 'when run with block' do
@@ -62,6 +64,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
           class_double 'Figaro::ENV',
             rails_env: 'production',
             stack_name: nil,
+            airbrake_environment_name: nil,
             airbrake_project_id: nil,
             airbrake_project_key: nil
         end
@@ -74,6 +77,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
           class_double 'Figaro::ENV',
             rails_env: 'development',
             stack_name: nil,
+            airbrake_environment_name: nil,
             airbrake_project_id: nil,
             airbrake_project_key: nil
         end
@@ -83,7 +87,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
 
       context 'when provided ignored environments through overrides' do
         let :overrides do
-          { ignore_environments: %w(test foo) }
+          { ignore_environments: %w[test foo] }
         end
 
         let(:instance) { described_class.new env, overrides }
@@ -93,6 +97,7 @@ RSpec.describe FuseCommon::AirbrakeConfig do
             class_double 'Figaro::ENV',
               rails_env: 'foo',
               stack_name: nil,
+              airbrake_environment_name: nil,
               airbrake_project_id: nil,
               airbrake_project_key: nil
           end
