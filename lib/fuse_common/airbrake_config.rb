@@ -13,7 +13,7 @@ module FuseCommon
       require_airbrake
 
       configure_airbrake do |config|
-        config.environment         = setting(:stack_name) || rails_env
+        config.environment = setting(:airbrake_environment_name) || setting(:stack_name) || rails_env
         config.ignore_environments = ignored_environments
 
         apply_project_settings config
@@ -32,7 +32,7 @@ module FuseCommon
       # https://github.com/airbrake/airbrake/issues/552
       # https://github.com/airbrake/airbrake-ruby/commit/59507aa3a38cefeb35c76f50f7783084a8c6e7ad
       def apply_project_settings config
-        config.project_id  = setting(:airbrake_project_id)  || fetch_defaults!(:airbrake_project_id)
+        config.project_id = setting(:airbrake_project_id) || fetch_defaults!(:airbrake_project_id)
         config.project_key = setting(:airbrake_project_key) || fetch_defaults!(:airbrake_project_key)
       end
 
@@ -65,7 +65,7 @@ module FuseCommon
       end
 
       def default_ignored_environments
-        %w(development test)
+        %w[development test]
       end
 
       def fetch_defaults! key
