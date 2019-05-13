@@ -10,11 +10,11 @@ RSpec.describe FuseCommon::AirbrakeConfig do
     context 'when ENV is empty' do
       let :env do
         class_double 'Figaro::ENV',
-          rails_env: nil,
-          stack_name: nil,
-          airbrake_environment_name: nil,
-          airbrake_project_id: nil,
-          airbrake_project_key: nil
+                     rails_env: nil,
+                     stack_name: nil,
+                     airbrake_environment_name: nil,
+                     airbrake_project_id: nil,
+                     airbrake_project_key: nil
       end
 
       it { expect { apply }.not_to raise_error }
@@ -29,20 +29,20 @@ RSpec.describe FuseCommon::AirbrakeConfig do
     context 'when stubbed configuration' do
       let :env do
         class_double 'Figaro::ENV',
-          rails_env: nil,
-          stack_name: nil,
-          airbrake_environment_name: nil,
-          airbrake_project_id: nil,
-          airbrake_project_key: nil
+                     rails_env: nil,
+                     stack_name: nil,
+                     airbrake_environment_name: nil,
+                     airbrake_project_id: nil,
+                     airbrake_project_key: nil
       end
 
       let :config do
         instance_double 'AirbrakeConfig',
-          'environment=': nil,
-          'ignore_environments=': nil,
-          'project_id=': nil,
-          'project_key=': nil,
-          'foo': nil
+                        'environment=': nil,
+                        'ignore_environments=': nil,
+                        'project_id=': nil,
+                        'project_key=': nil,
+                        'foo': nil
       end
 
       before do
@@ -62,11 +62,11 @@ RSpec.describe FuseCommon::AirbrakeConfig do
       context 'when provided not ignored environment' do
         let :env do
           class_double 'Figaro::ENV',
-            rails_env: 'production',
-            stack_name: nil,
-            airbrake_environment_name: nil,
-            airbrake_project_id: nil,
-            airbrake_project_key: nil
+                       rails_env: 'production',
+                       stack_name: nil,
+                       airbrake_environment_name: nil,
+                       airbrake_project_id: nil,
+                       airbrake_project_key: nil
         end
 
         it { expect { apply }.to raise_error FuseCommon::AirbrakeConfig::RequiredKeyMissed }
@@ -75,11 +75,11 @@ RSpec.describe FuseCommon::AirbrakeConfig do
       context 'when provided ignored environment by default' do
         let :env do
           class_double 'Figaro::ENV',
-            rails_env: 'development',
-            stack_name: nil,
-            airbrake_environment_name: nil,
-            airbrake_project_id: nil,
-            airbrake_project_key: nil
+                       rails_env: 'development',
+                       stack_name: nil,
+                       airbrake_environment_name: nil,
+                       airbrake_project_id: nil,
+                       airbrake_project_key: nil
         end
 
         it { expect { apply }.not_to raise_error }
@@ -95,11 +95,11 @@ RSpec.describe FuseCommon::AirbrakeConfig do
         context 'when ENV are in ignored environments' do
           let :env do
             class_double 'Figaro::ENV',
-              rails_env: 'foo',
-              stack_name: nil,
-              airbrake_environment_name: nil,
-              airbrake_project_id: nil,
-              airbrake_project_key: nil
+                         rails_env: 'foo',
+                         stack_name: nil,
+                         airbrake_environment_name: nil,
+                         airbrake_project_id: nil,
+                         airbrake_project_key: nil
           end
 
           it { expect { apply }.not_to raise_error }
