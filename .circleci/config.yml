@@ -33,10 +33,7 @@ jobs:
       - run:
           name: Run Rubocop
           command: |
-            junit_formatter_ruby=$(bundle show rubocop-junit-formatter)/lib/rubocop/formatter/junit_formatter.rb
-            bundle exec rubocop -L | \
-            circleci tests split --split-by=timings --timings-type=filename | \
-            xargs bundle exec rubocop -D -R -r $junit_formatter_ruby -c .rubocop.yml --format RuboCop::Formatter::JUnitFormatter --out ~/test_results/rubocop.xml --format progress
+            bundle exec rubocop
       - store_artifacts:
           path: ~/test_results
       - store_test_results:
