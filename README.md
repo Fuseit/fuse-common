@@ -45,6 +45,7 @@ FuseCommon.configure do |c|
   c.airbrake_project_id = 'AIRBRAKE_PROJECT_ID'
   c.airbrake_project_key = 'AIRBRAKE_PROJECT_KEY'
   c.airbrake_environment_name = Rails.env
+  c.rails_env = Rails.env
 end
 ```
 
