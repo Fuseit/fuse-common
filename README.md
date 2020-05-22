@@ -38,6 +38,16 @@ require 'fuse_common/airbrake_config'
 FuseCommon::AirbrakeConfig.new(Figaro.env).apply
 ```
 
+#### Configuration (otherwise it falls back to Figaro)
+add the following to: `config/initializers/fuse_common.rb`
+```ruby
+FuseCommon.configure do |c|
+  c.airbrake_project_id = 'AIRBRAKE_PROJECT_ID'
+  c.airbrake_project_key = 'AIRBRAKE_PROJECT_KEY'
+  c.airbrake_environment_name = Rails.env
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
