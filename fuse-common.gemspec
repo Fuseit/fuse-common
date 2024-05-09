@@ -29,13 +29,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib]
 
   # After updating Airbrake make sure that fuse_common/airbrake_libraries.rb is relevant
-  spec.add_dependency 'airbrake', '~> 9.0'
-  spec.add_dependency 'figaro', '~> 1.1'
-  spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'rails', '~> 4.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.3'
+  spec.add_dependency 'airbrake', '~> 11.0.3'
+  spec.add_dependency 'figaro', '~> 1.2.0'
+  spec.add_development_dependency 'bundler', '~> 1.17.3'
+  spec.add_development_dependency 'rails', '~> 4.2.11.3'
+  spec.add_development_dependency 'rake', '~> 12.3.3'
+  spec.add_development_dependency 'rspec', '~> 3.13.0'
+  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.6.0'
   spec.add_development_dependency 'rubocop', '~> 0.65'
-  spec.add_development_dependency 'rubocop-junit-formatter', '~> 0.1'
+  spec.add_development_dependency 'rubocop-junit-formatter', '~> 0.1.4'
 end
