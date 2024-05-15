@@ -1,3 +1,14 @@
+## v1.0.0
+
+**This version contains breaking changes:**
+* Ruby version incremented from 2.3.4 to 2.4.10
+* Incremented major versions of dependencies
+
+### Technical Improvements
+
+* [TI-450](https://fuseuniversal.atlassian.net/browse/TI-450): Chore TI-450 Update fuse-common gem dependencies
+
+
 ## v0.4.0
 
 ### Technical Improvements
