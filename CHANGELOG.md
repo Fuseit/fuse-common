@@ -1,3 +1,10 @@
+## v1.0.1
+
+### Technical Improvements
+
+* [TI-452](https://fuseuniversal.atlassian.net/browse/TI-452): Chore TI-452 Regress some gem dependencies for compatibility (#15) 81aaae2
+
+
 ## v1.0.0
 
 **This version contains breaking changes:**
@@ -6,7 +13,7 @@
 
 ### Technical Improvements
 
-* [TI-450](https://fuseuniversal.atlassian.net/browse/TI-450): Chore TI-450 Update fuse-common gem dependencies
+* [TI-450](https://fuseuniversal.atlassian.net/browse/TI-450): Chore TI-450 Update fuse-common gem dependencies (#12) 7d6f618
 
 
 ## v0.4.0
