@@ -1,3 +1,10 @@
+## v1.0.2
+
+### Chore
+
+* [chore]: Chore Specify patch version for Figaro gem dependency (#17) bdef0e0
+
+
 ## v1.0.1
 
 ### Technical Improvements
