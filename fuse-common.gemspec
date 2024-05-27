@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
 
   # After updating Airbrake make sure that fuse_common/airbrake_libraries.rb is relevant
   spec.add_dependency 'airbrake', '~> 11.0.3'
-  spec.add_dependency 'figaro', '~> 1.1'
+  spec.add_dependency 'figaro', '~> 1.1.1'
   spec.add_development_dependency 'bundler', '~> 1.17.3'
   spec.add_development_dependency 'rails', '~> 4.2.11.3'
   spec.add_development_dependency 'rake', '~> 11.3'
